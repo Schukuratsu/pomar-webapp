@@ -20,10 +20,10 @@ class EspecieApi {
       data,
     });
   }
-  static remove() {
+  static remove(id) {
     return Axios({
       method: "REMOVE",
-      url: "/api/v1/especie/${id}",
+      url: `/api/v1/colheita/${id}`,
     });
   }
 }

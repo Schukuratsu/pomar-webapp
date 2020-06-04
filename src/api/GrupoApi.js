@@ -13,17 +13,17 @@ class GrupoApi {
       url: `/api/v1/grupo/${id}`,
     });
   }
-  static save(payload) {
+  static save(data) {
     return Axios({
       method: "POST",
       url: "/api/v1/grupo",
-      payload,
+      data,
     });
   }
-  static remove() {
+  static remove(id) {
     return Axios({
       method: "REMOVE",
-      url: "/api/v1/grupo/${id}",
+      url: `/api/v1/grupo/${id}`,
     });
   }
 }

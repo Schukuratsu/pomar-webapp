@@ -13,17 +13,17 @@ class ColheitaApi {
       url: `/api/v1/colheita/${id}`,
     });
   }
-  static save(payload) {
+  static save(data) {
     return Axios({
       method: "POST",
       url: "/api/v1/colheita",
-      payload,
+      data,
     });
   }
-  static remove() {
+  static remove(id) {
     return Axios({
       method: "REMOVE",
-      url: "/api/v1/colheita/${id}",
+      url: `/api/v1/colheita/${id}`,
     });
   }
 }

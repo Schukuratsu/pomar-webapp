@@ -13,17 +13,17 @@ class ArvoreApi {
       url: `/api/v1/arvore/${id}`,
     });
   }
-  static save(payload) {
+  static save(data) {
     return Axios({
       method: "POST",
       url: "/api/v1/arvore",
-      payload,
+      data,
     });
   }
-  static remove() {
+  static remove(id) {
     return Axios({
       method: "REMOVE",
-      url: "/api/v1/arvore/${id}",
+      url: `/api/v1/colheita/${id}`,
     });
   }
 }
