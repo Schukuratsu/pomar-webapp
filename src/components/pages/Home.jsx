@@ -3,6 +3,7 @@ import { Card } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import { toastr } from "react-redux-toastr";
+import Header from "../common/Header";
 import EspecieModal from "../common/EspecieModal";
 import ArvoreModal from "../common/ArvoreModal";
 import GrupoModal from "../common/GrupoModal";
@@ -108,72 +109,78 @@ function Home() {
         onCancel={closeColheitaModal}
       />
       <div className="page">
-        <div className="quarter">
-          <Card
-            title="Espécies"
-            extra={<PlusOutlined onClick={openEspecieModal} />}
-          >
-            <div className="content">
-              {especies.map((especie) => (
-                <Card key={`especie ${especie._id}`}>{especie.descricao}</Card>
-              ))}
-            </div>
-          </Card>
-        </div>
-        <div className="quarter">
-          <Card
-            title="Árvores"
-            extra={<PlusOutlined onClick={openArvoreModal} />}
-          >
-            <div className="content">
-              {arvores.map((arvore) => (
-                <Card key={`arvore ${arvore._id}`}>
-                  {`${arvore.descricao} - ${arvore.idade} - ${
-                    especies.find((especie) => especie._id === arvore.especie)
-                      .descricao
-                  }`}
-                </Card>
-              ))}
-            </div>
-          </Card>
-        </div>
-        <div className="quarter">
-          <Card
-            title="Grupos"
-            extra={<PlusOutlined onClick={openGrupoModal} />}
-          >
-            <div className="content">
-              {grupos.map((grupo) => (
-                <Card key={`arvore ${grupo._id}`}>
-                  {`${grupo.nome} - ${grupo.descricao} - ${arvores
-                    .filter((arvore) => grupo.arvores.includes(arvore._id))
-                    .map((arvore) => arvore.descricao)
-                    .join(" - ")}`}
-                </Card>
-              ))}
-            </div>
-          </Card>
-        </div>
-        <div className="quarter">
-          <Card
-            title="Colheitas"
-            extra={<PlusOutlined onClick={openColheitaModal} />}
-          >
-            <div className="content">
-              {colheitas.map((colheita) => (
-                <Card key={`colheita ${colheita._id}`}>
-                  {`${colheita.informacoes} - ${colheita.data} - ${
-                    colheita.pesoBruto
-                  } - ${colheita.isGroup ? "grupo" : "árvore"} - ${
-                    colheita.isGroup
-                      ? grupos.find((grupo) => grupo._id === colheita.ref).nome
-                      : arvores.find((arvore) => arvore._id === colheita.ref)
-                          .descricao
-                  }`}
-                </Card>
-              ))}
-            </div>
-          </Card>
+        <Header />
+        <div className="body breakable-row">
+          <div className="quarter">
+            <Card
+              title="Espécies"
+              extra={<PlusOutlined onClick={openEspecieModal} />}
+            >
+              <div className="content">
+                {especies.map((especie) => (
+                  <Card key={`especie ${especie._id}`}>
+                    {especie.descricao}
+                  </Card>
+                ))}
+              </div>
+            </Card>
+          </div>
+          <div className="quarter">
+            <Card
+              title="Árvores"
+              extra={<PlusOutlined onClick={openArvoreModal} />}
+            >
+              <div className="content">
+                {arvores.map((arvore) => (
+                  <Card key={`arvore ${arvore._id}`}>
+                    {`${arvore.descricao} - ${arvore.idade} - ${
+                      especies.find((especie) => especie._id === arvore.especie)
+                        .descricao
+                    }`}
+                  </Card>
+                ))}
+              </div>
+            </Card>
+          </div>
+          <div className="quarter">
+            <Card
+              title="Grupos"
+              extra={<PlusOutlined onClick={openGrupoModal} />}
+            >
+              <div className="content">
+                {grupos.map((grupo) => (
+                  <Card key={`arvore ${grupo._id}`}>
+                    {`${grupo.nome} - ${grupo.descricao} - ${arvores
+                      .filter((arvore) => grupo.arvores.includes(arvore._id))
+                      .map((arvore) => arvore.descricao)
+                      .join(" - ")}`}
+                  </Card>
+                ))}
+              </div>
+            </Card>
+          </div>
+          <div className="quarter">
+            <Card
+              title="Colheitas"
+              extra={<PlusOutlined onClick={openColheitaModal} />}
+            >
+              <div className="content">
+                {colheitas.map((colheita) => (
+                  <Card key={`colheita ${colheita._id}`}>
+                    {`${colheita.informacoes} - ${colheita.data} - ${
+                      colheita.pesoBruto
+                    } - ${colheita.isGroup ? "grupo" : "árvore"} - ${
+                      colheita.isGroup
+                        ? grupos.find((grupo) => grupo._id === colheita.ref)
+                            .nome
+                        : arvores.find((arvore) => arvore._id === colheita.ref)
+                            .descricao
+                    }`}
+                  </Card>
+                ))}
+              </div>
+            </Card>
+          </div>
         </div>
       </div>
     </>

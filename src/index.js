@@ -3,8 +3,10 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import ReduxToastr from "react-redux-toastr";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 import store from "./store";
 import Home from "./components/pages/Home";
+import Relatorio from "./components/pages/Relatorio";
 import "./index.css";
 import "./components/templates/global.scss";
 import "antd/dist/antd.css"; // or 'antd/dist/antd.less'
@@ -13,7 +15,12 @@ import * as serviceWorker from "./serviceWorker";
 
 ReactDOM.render(
   <Provider store={store}>
-    <Home />
+    <BrowserRouter>
+      <Switch>
+        <Route exact path="/relatorio" component={Relatorio} />
+        <Route path="/" component={Home} />
+      </Switch>
+    </BrowserRouter>
     <ReduxToastr
       timeOut={4000}
       newestOnTop={false}
