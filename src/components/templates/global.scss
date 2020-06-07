@@ -32,6 +32,8 @@ $grayText: #929292;
     background-position: center;
     background-size: cover;
 }
+
+// Home
 .quarter{
     padding: 10px;
     height: 50%;
@@ -48,11 +50,19 @@ $grayText: #929292;
 .content > div{
     margin: 0px #{$smallSpacing}px #{$smallSpacing}px 0px;
 }
+
+// Relatório
 .data-filter{
     min-width: 142px;
     max-width: 250px;
 }
 
+// ### OVERWRITE ANTD ###
+
+// make border of nested cards more visible
+.ant-card-bordered .ant-card-bordered{
+    border-color: #bbb !important;
+}
 
 // ### SINGLE STYLE CLASSES ###
 
