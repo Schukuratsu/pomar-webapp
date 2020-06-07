@@ -10,7 +10,7 @@ function Header() {
         onClick={() => history.push("/")}
         style={{ cursor: "pointer" }}
       >
-        PoManager
+        Pomanager
       </Typography.Title>
       <Typography.Link onClick={() => history.push("/relatorio")}>
         Gerar relatório
