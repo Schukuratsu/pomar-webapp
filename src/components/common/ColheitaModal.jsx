@@ -12,13 +12,12 @@ function ColheitaModal({ visible, onCreate, onCancel }) {
   );
   const grupos = useSelector((state) => state.grupoState.grupos, shallowEqual);
   const [isGroup, setIsGroup] = React.useState(true);
-  // form.getFieldValue("isGroup")
   return (
     <Modal
       visible={visible}
-      title="Create a new collection"
-      okText="Create"
-      cancelText="Cancel"
+      title="Criar nova colheita"
+      okText="Confirmar"
+      cancelText="Cancelar"
       onCancel={onCancel}
       onOk={() => {
         form
@@ -43,7 +42,7 @@ function ColheitaModal({ visible, onCreate, onCancel }) {
           label="Informações"
           rules={[{ required: true, message: "Preencha este campo!" }]}
         >
-          <Input />
+          <Input autoFocus />
         </Form.Item>
         <Form.Item
           name="data"
@@ -54,10 +53,10 @@ function ColheitaModal({ visible, onCreate, onCancel }) {
         </Form.Item>
         <Form.Item
           name="pesoBruto"
-          label="Peso bruto"
+          label="Peso bruto (Kg)"
           rules={[{ required: true, message: "Preencha este campo!" }]}
         >
-          <InputNumber />
+          <InputNumber min={0.1} max={1000} />
         </Form.Item>
         <Form.Item
           name="isGroup"

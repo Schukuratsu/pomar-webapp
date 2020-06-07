@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 const { Item } = Form;
 const { Option } = Select;
 
-function PhraseText({ visible, onCreate, onCancel }) {
+function ArvoreModal({ visible, onCreate, onCancel }) {
   const [form] = Form.useForm();
 
   const especies = useSelector((state) => state.especieState.especies);
@@ -13,9 +13,9 @@ function PhraseText({ visible, onCreate, onCancel }) {
   return (
     <Modal
       visible={visible}
-      title="Create a new collection"
-      okText="Create"
-      cancelText="Cancel"
+      title="Criar nova árvore"
+      okText="Confirmar"
+      cancelText="Cancelar"
       onCancel={onCancel}
       onOk={() => {
         form
@@ -40,7 +40,7 @@ function PhraseText({ visible, onCreate, onCancel }) {
           label="Descrição"
           rules={[{ required: true, message: "Preencha este campo!" }]}
         >
-          <Input />
+          <Input autoFocus />
         </Item>
         <Item
           name="idade"
@@ -67,4 +67,4 @@ function PhraseText({ visible, onCreate, onCancel }) {
   );
 }
 
-export default PhraseText;
+export default ArvoreModal;

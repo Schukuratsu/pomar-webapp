@@ -1,14 +1,14 @@
 import React from "react";
 import { Modal, Form, Input } from "antd";
 
-function PhraseText({ visible, onCreate, onCancel }) {
+function EspecieModal({ visible, onCreate, onCancel }) {
   const [form] = Form.useForm();
   return (
     <Modal
       visible={visible}
-      title="Create a new collection"
-      okText="Create"
-      cancelText="Cancel"
+      title="Criar nova espécie"
+      okText="Confirmar"
+      cancelText="Cancelar"
       onCancel={onCancel}
       onOk={() => {
         form
@@ -33,11 +33,11 @@ function PhraseText({ visible, onCreate, onCancel }) {
           label="Nome da espécie"
           rules={[{ required: true, message: "Preencha este campo!" }]}
         >
-          <Input />
+          <Input autoFocus />
         </Form.Item>
       </Form>
     </Modal>
   );
 }
 
-export default PhraseText;
+export default EspecieModal;

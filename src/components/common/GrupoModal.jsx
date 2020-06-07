@@ -4,14 +4,14 @@ import { connect } from "react-redux";
 
 const Option = Select;
 
-function PhraseText({ visible, onCreate, onCancel, arvores }) {
+function GrupoModal({ visible, onCreate, onCancel, arvores }) {
   const [form] = Form.useForm();
   return (
     <Modal
       visible={visible}
-      title="Create a new collection"
-      okText="Create"
-      cancelText="Cancel"
+      title="Criar novo grupo"
+      okText="Confirmar"
+      cancelText="Cancelar"
       onCancel={onCancel}
       onOk={() => {
         form
@@ -36,7 +36,7 @@ function PhraseText({ visible, onCreate, onCancel, arvores }) {
           label="Nome do grupo"
           rules={[{ required: true, message: "Preencha este campo!" }]}
         >
-          <Input />
+          <Input autoFocus />
         </Form.Item>
         <Form.Item
           name="descricao"
@@ -65,4 +65,4 @@ function PhraseText({ visible, onCreate, onCancel, arvores }) {
 
 const mapStateToProps = (state) => ({ arvores: state.arvoreState.arvores });
 
-export default connect(mapStateToProps)(PhraseText);
+export default connect(mapStateToProps)(GrupoModal);
