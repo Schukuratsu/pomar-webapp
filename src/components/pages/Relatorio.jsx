@@ -34,6 +34,7 @@ function Relatório() {
     shallowEqual
   );
 
+  // ### FILTERS ###
   const especieFilter = (
     <Select
       onChange={setSelectedEspecie}
@@ -48,6 +49,7 @@ function Relatório() {
       ))}
     </Select>
   );
+
   const arvoreFilter = (
     <Select
       onChange={setSelectedArvore}
@@ -62,6 +64,7 @@ function Relatório() {
       ))}
     </Select>
   );
+
   const grupoFilter = (
     <Select
       onChange={setSelectedGrupo}
@@ -76,6 +79,7 @@ function Relatório() {
       ))}
     </Select>
   );
+
   const dataFilter = (
     <RangePicker
       onChange={setSelectedData}
@@ -85,12 +89,77 @@ function Relatório() {
     />
   );
 
-  const getEspecie = (id, key) =>
+  React.useEffect(() => {
+    setAutoExpandParent(true);
+    setExpandedKeys(
+      [
+        ...[selectedGrupo]
+          .filter((value) => value)
+          .flatMap((value) =>
+            colheitas
+              .filter((colheita) => colheita.ref === value)
+              .map((colheita) => `${colheita._id}`)
+          ),
+        ...[selectedArvore]
+          .filter((value) => value)
+          .map((value) => [
+            grupos
+              .filter((grupo) => grupo.arvores.includes(selectedArvore))
+              .map((grupo) =>
+                colheitas
+                  .filter((colheita) => colheita.ref === grupo._id)
+                  .map((colheita) => [
+                    colheita._id,
+                    `${colheita._id} ${grupo._id}`,
+                  ])
+              ),
+            colheitas
+              .filter((colheita) => colheita.ref === value)
+              .map((colheita) => colheita._id),
+          ]),
+        ...[selectedEspecie]
+          .filter((value) => value)
+          .map((value) =>
+            arvores
+              .filter((arvore) => arvore.especie === value)
+              .map((arvore) => [
+                grupos
+                  .filter((grupo) => grupo.arvores.includes(arvore._id))
+                  .map((grupo) =>
+                    colheitas
+                      .filter((colheita) => colheita.ref === grupo._id)
+                      .map((colheita) => [
+                        colheita._id,
+                        `${colheita._id} ${grupo._id}`,
+                        `${colheita._id} ${arvore._id}`,
+                      ])
+                  ),
+                colheitas
+                  .filter((colheita) => colheita.ref === arvore._id)
+                  .map((colheita) => [
+                    colheita._id,
+                    `${colheita._id} ${arvore._id}`,
+                  ]),
+              ])
+          ),
+      ].flat(10)
+    );
+  }, [
+    selectedEspecie,
+    selectedArvore,
+    selectedGrupo,
+    selectedData,
+    colheitas,
+    grupos,
+    arvores,
+  ]);
+
+  // ### TREE FUNCTIONS ###
+  const getEspecie = (id) =>
     especies
       .filter((especie) => especie._id === id)
       .map((especie) => ({
         title: getText.especie(especie),
-        key: `${key} ${especie._id}`,
       }));
 
   const getArvores = (ids, key) =>
@@ -99,7 +168,7 @@ function Relatório() {
       .map((arvore) => ({
         title: getText.arvore(arvore),
         key: `${key} ${arvore._id}`,
-        children: getEspecie(arvore.especie, key),
+        children: getEspecie(arvore.especie),
       }));
 
   const getGrupo = (id, key) =>
