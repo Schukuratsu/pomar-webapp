@@ -59,7 +59,7 @@ function Home() {
     setGrupoModal((data) => ({ ...data, visible: false }));
   const validateGrupo = (obj) =>
     grupos.findIndex((grupo) => grupo.nome === obj.nome) !== -1
-      ? toastr.error(`A árvore '${obj.descricao}' já existe!`) && false
+      ? toastr.error(`O grupo '${obj.nome}' já existe!`) && false
       : true;
   const saveGrupo = (values) =>
     validateGrupo(values) &&
