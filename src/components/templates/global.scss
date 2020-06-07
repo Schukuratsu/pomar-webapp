@@ -48,6 +48,10 @@ $grayText: #929292;
 .content > div{
     margin: 0px #{$smallSpacing}px #{$smallSpacing}px 0px;
 }
+.data-filter{
+    min-width: 142px;
+    max-width: 250px;
+}
 
 
 // ### SINGLE STYLE CLASSES ###
@@ -102,4 +106,7 @@ $grayText: #929292;
 }
 .space-vertical > :not(:first-child){
     margin-top: 10px;
+}
+.scroll-x-auto{
+    overflow-x: auto;
 }

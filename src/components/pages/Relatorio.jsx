@@ -82,6 +82,7 @@ function Relatório() {
 
   const dataFilter = (
     <RangePicker
+      className="data-filter grow"
       onChange={setSelectedData}
       allowClear
       placeholder={["Início", "Fim"]}
@@ -241,7 +242,7 @@ function Relatório() {
         <div className="body small-padding space-vertical">
           <Card
             title={
-              <div className="row align-center space-horizontal">
+              <div className="row align-center space-horizontal scroll-x-auto">
                 <Typography>Colheitas</Typography>
                 {especieFilter}
                 {arvoreFilter}
