@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Tree, Typography, Select, DatePicker } from "antd";
+import { Card, Tree, Typography, Select, DatePicker, Empty } from "antd";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import Moment from "moment";
 import Header from "../common/Header";
@@ -257,6 +257,12 @@ function Relatório() {
               autoExpandParent={autoExpandParent}
               treeData={getColheitas()}
             />
+            {!colheitas[0] && (
+              <Empty
+                description="Sem Dados"
+                image={Empty.PRESENTED_IMAGE_SIMPLE}
+              />
+            )}
           </Card>
         </div>
       </div>

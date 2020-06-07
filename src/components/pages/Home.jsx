@@ -1,5 +1,5 @@
 import React from "react";
-import { Card } from "antd";
+import { Card, Empty } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import { toastr } from "react-redux-toastr";
@@ -124,6 +124,12 @@ function Home() {
                   </Card>
                 ))}
               </div>
+              {!especies[0] && (
+                <Empty
+                  description="Sem Dados"
+                  image={Empty.PRESENTED_IMAGE_SIMPLE}
+                />
+              )}
             </Card>
           </div>
           <div className="quarter">
@@ -138,6 +144,12 @@ function Home() {
                   </Card>
                 ))}
               </div>
+              {!arvores[0] && (
+                <Empty
+                  description="Sem Dados"
+                  image={Empty.PRESENTED_IMAGE_SIMPLE}
+                />
+              )}
             </Card>
           </div>
           <div className="quarter">
@@ -152,6 +164,12 @@ function Home() {
                   </Card>
                 ))}
               </div>
+              {!grupos[0] && (
+                <Empty
+                  description="Sem Dados"
+                  image={Empty.PRESENTED_IMAGE_SIMPLE}
+                />
+              )}
             </Card>
           </div>
           <div className="quarter">
@@ -166,6 +184,12 @@ function Home() {
                   </Card>
                 ))}
               </div>
+              {!colheitas[0] && (
+                <Empty
+                  description="Sem Dados"
+                  image={Empty.PRESENTED_IMAGE_SIMPLE}
+                />
+              )}
             </Card>
           </div>
         </div>
