@@ -1,21 +1,15 @@
 import React from "react";
 import { Card, Tree, Typography, Select, DatePicker } from "antd";
-import { PlusOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
-import { toastr } from "react-redux-toastr";
 import Moment from "moment";
 import Header from "../common/Header";
-import EspecieModal from "../common/EspecieModal";
-import ArvoreModal from "../common/ArvoreModal";
-import GrupoModal from "../common/GrupoModal";
-import ColheitaModal from "../common/ColheitaModal";
+import getText from "../../helpers/getText";
 import * as fetchData from "../../actions/fetchData";
-import * as saveData from "../../actions/saveData";
 
 const { Option } = Select;
 const { RangePicker } = DatePicker;
 
-function Home() {
+function Relatório() {
   const dispatch = useDispatch();
 
   const [expandedKeys, setExpandedKeys] = React.useState([]);
@@ -40,17 +34,6 @@ function Home() {
     shallowEqual
   );
 
-  const getEspecieText = (especie) => `Espécie: ${especie.descricao}`;
-  const getArvoreText = (arvore) =>
-    `Árvore: ${arvore.descricao} - ${arvore.idade} ano${
-      arvore.idade !== 1 ? "s" : ""
-    }`;
-  const getGrupoText = (grupo) => `Grupo: ${grupo.nome} - ${grupo.descricao}`;
-  const getColheitaText = (colheita) =>
-    `Colheita: ${colheita.informacoes} - ${Moment(colheita.data).format(
-      "DD/MM/YYYY"
-    )} - ${colheita.pesoBruto}Kg`;
-
   const especieFilter = (
     <Select
       onChange={setSelectedEspecie}
@@ -60,7 +43,7 @@ function Home() {
     >
       {especies.map((especie) => (
         <Option value={especie._id} key={especie._id}>
-          {getEspecieText(especie)}
+          {getText.especie(especie)}
         </Option>
       ))}
     </Select>
@@ -74,7 +57,7 @@ function Home() {
     >
       {arvores.map((arvore) => (
         <Option value={arvore._id} key={arvore._id}>
-          {getArvoreText(arvore)}
+          {getText.arvore(arvore)}
         </Option>
       ))}
     </Select>
@@ -88,20 +71,25 @@ function Home() {
     >
       {grupos.map((grupo) => (
         <Option value={grupo._id} key={grupo._id}>
-          {getGrupoText(grupo)}
+          {getText.grupo(grupo)}
         </Option>
       ))}
     </Select>
   );
   const dataFilter = (
-    <RangePicker onChange={setSelectedData} format="DD/MM/YYYY" />
+    <RangePicker
+      onChange={setSelectedData}
+      allowClear
+      placeholder={["Início", "Fim"]}
+      format="DD/MM/YYYY"
+    />
   );
 
   const getEspecie = (id, key) =>
     especies
       .filter((especie) => especie._id === id)
       .map((especie) => ({
-        title: getEspecieText(especie),
+        title: getText.especie(especie),
         key: `${key} ${especie._id}`,
       }));
 
@@ -109,7 +97,7 @@ function Home() {
     arvores
       .filter((arvore) => ids.includes(arvore._id))
       .map((arvore) => ({
-        title: getArvoreText(arvore),
+        title: getText.arvore(arvore),
         key: `${key} ${arvore._id}`,
         children: getEspecie(arvore.especie, key),
       }));
@@ -118,7 +106,7 @@ function Home() {
     grupos
       .filter((grupo) => grupo._id === id)
       .map((grupo) => ({
-        title: getGrupoText(grupo),
+        title: getText.grupo(grupo),
         key: `${key} ${grupo._id}`,
         children: getArvores(grupo.arvores, key),
       }));
@@ -156,7 +144,7 @@ function Home() {
                   .includes(selectedEspecie)))
       )
       .map((colheita) => {
-        const title = getColheitaText(colheita);
+        const title = getText.colheita(colheita);
         const key = colheita._id;
         const children = colheita.isGroup
           ? getGrupo(colheita.ref, key)
@@ -206,4 +194,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default Relatório;
