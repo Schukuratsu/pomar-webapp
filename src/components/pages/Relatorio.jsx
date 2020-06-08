@@ -229,10 +229,10 @@ function Relatório() {
 
   // load data from db
   React.useEffect(() => {
+    dispatch(fetchData.fetchColheitas());
     dispatch(fetchData.fetchEspecies());
     dispatch(fetchData.fetchArvores());
     dispatch(fetchData.fetchGrupos());
-    dispatch(fetchData.fetchColheitas());
   }, [dispatch]);
 
   return (
