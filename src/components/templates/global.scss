@@ -41,15 +41,27 @@ $grayText: #929292;
     border-width: 0px 1px 1px 0px;
     border-style: solid;
     border-color: rgba($color: #6c706c, $alpha: 0.5);
-    overflow-y: overlay;
+    overflow-y: auto;
+    max-height: 100vh;
+    overflow-x: hidden;
 }
 .content{
     @extend .breakable-row;
+    // add spacing between cards inside content div
     margin: 0px -#{$smallSpacing}px -#{$smallSpacing}px 0px;
 }
 .content > div{
+    text-align: center;
+    // add spacing between cards inside content div
     margin: 0px #{$smallSpacing}px #{$smallSpacing}px 0px;
+    // cards should not overflow parent
+    max-width: calc(100% - #{$smallSpacing}px);
+    word-break: break-word;
+    // cards should occupy whole line
+    flex: 1 0 auto;
 }
+
+
 
 // Relatório
 .data-filter{
