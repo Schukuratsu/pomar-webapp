@@ -1,11 +1,17 @@
 import React from "react";
 import { Modal, Form, Input } from "antd";
+import { useSelector, shallowEqual } from "react-redux";
 
 function EspecieModal({ visible, onCreate, onCancel }) {
   const [form] = Form.useForm();
+  const loadingEspecies = useSelector(
+    (state) => state.especieState.pending,
+    shallowEqual
+  );
   return (
     <Modal
       visible={visible}
+      confirmLoading={loadingEspecies}
       title="Criar nova espécie"
       okText="Confirmar"
       cancelText="Cancelar"

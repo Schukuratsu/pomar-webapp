@@ -1,18 +1,24 @@
 import React from "react";
 import { Modal, Form, Input, InputNumber, Select } from "antd";
-import { useSelector } from "react-redux";
+import { useSelector, shallowEqual } from "react-redux";
 
 const { Item } = Form;
 const { Option } = Select;
 
 function ArvoreModal({ visible, onCreate, onCancel }) {
   const [form] = Form.useForm();
-
-  const especies = useSelector((state) => state.especieState.especies);
-
+  const especies = useSelector(
+    (state) => state.especieState.especies,
+    shallowEqual
+  );
+  const loadingArvores = useSelector(
+    (state) => state.arvoreState.pending,
+    shallowEqual
+  );
   return (
     <Modal
       visible={visible}
+      confirmLoading={loadingArvores}
       title="Criar nova árvore"
       okText="Confirmar"
       cancelText="Cancelar"

@@ -11,10 +11,15 @@ function ColheitaModal({ visible, onCreate, onCancel }) {
     shallowEqual
   );
   const grupos = useSelector((state) => state.grupoState.grupos, shallowEqual);
+  const loadingColheitas = useSelector(
+    (state) => state.colheitaState.pending,
+    shallowEqual
+  );
   const [isGroup, setIsGroup] = React.useState(true);
   return (
     <Modal
       visible={visible}
+      confirmLoading={loadingColheitas}
       title="Criar nova colheita"
       okText="Confirmar"
       cancelText="Cancelar"

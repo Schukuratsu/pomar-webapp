@@ -1,14 +1,23 @@
 import React from "react";
 import { Modal, Form, Input, Select } from "antd";
-import { connect } from "react-redux";
+import { useSelector, shallowEqual } from "react-redux";
 
 const Option = Select;
 
-function GrupoModal({ visible, onCreate, onCancel, arvores }) {
+function GrupoModal({ visible, onCreate, onCancel }) {
   const [form] = Form.useForm();
+  const arvores = useSelector(
+    (state) => state.arvoreState.arvores,
+    shallowEqual
+  );
+  const loadingGrupos = useSelector(
+    (state) => state.grupoState.pending,
+    shallowEqual
+  );
   return (
     <Modal
       visible={visible}
+      confirmLoading={loadingGrupos}
       title="Criar novo grupo"
       okText="Confirmar"
       cancelText="Cancelar"
@@ -63,6 +72,4 @@ function GrupoModal({ visible, onCreate, onCancel, arvores }) {
   );
 }
 
-const mapStateToProps = (state) => ({ arvores: state.arvoreState.arvores });
-
-export default connect(mapStateToProps)(GrupoModal);
+export default GrupoModal;
